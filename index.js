@@ -11,8 +11,12 @@ function mapAsync(iterator) {
     return stream
 
     function write(chunk, queue) {
-        counter++
-        iterator(chunk, next)
+        if (iterator.length === 2) {
+            counter++
+            iterator(chunk, next)
+        } else {
+            queue.push(iterator(chunk))
+        }
     }
 
     function next(err, data) {

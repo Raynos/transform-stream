@@ -1,0 +1,36 @@
+{
+  "name": "async-map-stream",
+  "version": "0.1.0",
+  "description": "Turn an asynchronous function into a through stream",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Raynos/async-map-stream.git",
+  "main": "index",
+  "homepage": "https://github.com/Raynos/async-map-stream",
+  "contributors": [
+    {
+      "name": "Jake Verbaten"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Raynos/async-map-stream/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "read-write-stream": "~0.1.0"
+  },
+  "devDependencies": {
+    "tap": "~0.3.1",
+    "read-stream": "~0.4.1",
+    "write-stream": "~0.4.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Raynos/async-map-stream/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "tap --stderr --tap ./test"
+  }
+}

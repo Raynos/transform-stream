@@ -1,25 +1,53 @@
-# mapping-stream
+# transform-stream
 
-Turn an asynchronous function into a through stream
+Turn an transformation function into a through stream
 
 ## Example
+
+Works both synchronously and asynchronously!
+
+You can also set a boolean to tell the stream to handle each
+    transformation in a serial fashion instead of all of them
+    in parallel.
 
 ``` js
 var from = require("read-stream").fromArray
     , to = require("write-stream").toArray
 
-    , map = require("mapping-stream")
+    , transform = require("transform-stream")
 
 from([1,2,3])
-    .pipe(map(function (item, cb) {
+    // transform
+    .pipe(transform(function (item, finish) {
         setTimeout(function() {
-            cb(null, item * 2)
-        }, 1000);
+            finish(null, item * 2)
+        }, 1000)
     }))
-    .pipe(map(function (item) {
+    .pipe(transform(function (item, next, finish) {
+        setTimeout(function () {
+            next(item * 2)
+        }, 500)
+
+        setTimeout(function () {
+            next(item * 3)
+        }, 1000)
+
+        setTimeout(function () {
+            finish()
+        }, 1500)
+    }))
+    .pipe(transform(function (item) {
         return item * 2
     }))
-    .pipe(to([], function toList (list) {
+    .pipe(transform(function (item, finish) {
+        console.log("does not")
+
+        setTimeout(function () {
+            console.log("run in parallel")
+            finish(null, item)
+        }, 1000)
+    }, true))
+    .pipe(to(function toList (list) {
         console.log("list", list)
     }))
 
@@ -27,7 +55,7 @@ from([1,2,3])
 
 ## Installation
 
-`npm install mapping-stream`
+`npm install transform-stream`
 
 ## Contributors
 

@@ -10,6 +10,8 @@ You can also set a boolean to tell the stream to handle each
     transformation in a serial fashion instead of all of them
     in parallel.
 
+Backwards compatible with [`through`][1]
+
 ``` js
 var from = require("read-stream").fromArray
     , to = require("write-stream").toArray
@@ -62,3 +64,5 @@ from([1,2,3])
  - Raynos
 
 ## MIT Licenced
+
+  [1]: https://github.com/dominictarr/through

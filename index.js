@@ -9,6 +9,9 @@ function mapAsync(iterator, serial) {
         , push = queue.push
         , stream = queue.stream
 
+    // Legacy through API :(
+    stream.queue = push
+
     return stream
 
     function write(chunk, queue) {

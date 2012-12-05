@@ -26,12 +26,13 @@ from([1,2,3])
         return item * 2
     }))
     .pipe(transform(function (item, finish) {
-        console.log("does not")
+        console.log("runs in serial")
 
         setTimeout(function () {
-            console.log("run in parallel")
             finish(null, item)
         }, 1000)
+    }, function flush() {
+        console.log("finished all data, now flush anything left")
     }, true))
     .pipe(to(function toList (list) {
         // 8 12 16 24 24 36
